@@ -2,10 +2,10 @@
 # Final Project(Project 5,6,7)
 
 Team Members:
-1. Name
-2. Name
+1. Assaf Boneh
+2. Saulo Guzman
 
-Java Version:
+Java Version: Using Godot 4, and written in gdscript.
 
 Additional Comments:
 
