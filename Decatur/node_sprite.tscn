@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://c3t81cvjdl8gm"]
+
+[ext_resource type="Texture2D" uid="uid://b5h00nm2mmohy" path="res://art/particle.png" id="1_owb5p"]
+[ext_resource type="Script" path="res://node_sprite.gd" id="2_etj8n"]
+
+[node name="node_sprite" type="Sprite2D"]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_owb5p")
+script = ExtResource("2_etj8n")
+
+[node name="textLabel" type="RichTextLabel" parent="."]
+modulate = Color(0, 0, 0, 1)
+offset_left = -160.0
+offset_top = -340.0
+offset_right = 530.0
+offset_bottom = 390.0
+theme_override_font_sizes/normal_font_size = 500
+text = "0"
