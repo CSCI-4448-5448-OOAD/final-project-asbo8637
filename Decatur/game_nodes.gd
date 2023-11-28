@@ -1,56 +1,90 @@
-class_name game_nodes extends Node2D
+class_name game_node extends Node2D
 
 var factor_count = 0
 var neighbors = Array() 
-var player = 0
+var action: Callable
+var player_val: String
+var player: int
 
-var sprite = preload("res://node_sprite.tscn")
-var spriteIns = sprite.instantiate()
-
-var posX: int
-var posY: int
+@onready var sprite = $node_sprite
+@onready var move_buttton = $moveButton
+@onready var text_label = $textLabel
+@onready var Action_button = $Action_Button
+@onready var Expand_button = $Expand_Button
 
 var move_val: int
-
-func _ready() -> void:
-	self.add_to_group("nodes")
-	add_child(spriteIns)
-	spriteIns.set_parent(self)
-	spriteIns.position = Vector2(posX, posY)
+var expand_val: int
+var Even = 1
 	
-func _init(x: int, y: int, ocean: String, land: String) -> void:
-	posX = x
-	posY = y
+func constructor(x: int, y: int, ocean: String, land: String) -> void:
+	self.add_to_group("nodes")
+	self.add_to_group("player0")
+	position = Vector2(x, y)
 	self.add_to_group(ocean)
 	self.add_to_group(land)
 	
-
-func add_neighbor(x: game_nodes):
+func add_neighbor(x: game_node):
 	neighbors.append(x)
-
-func read_neighbor_size():
-	print(neighbors.size())
 
 func set_int(x: int): 
 	factor_count=x
-	spriteIns.set_int(factor_count)
+	text_label.text=str(factor_count)
 	
 func increment_int(x: int):
 	factor_count+=x
-	spriteIns.set_int(factor_count)
+	text_label.text=str(factor_count)
 	
 func move(x: int):
 	for neighbor in neighbors:
 		neighbor.move_val=x
-		neighbor.move_reciever()
-
-func move_reciever():
-	spriteIns.activate_move()
+		neighbor.player_val="player"+str(player)
+		neighbor.move_reciever(player)
+		
+func Expand(x: game_node):
+	x.expand_val = 1
+	x.Expand_reciever()
+	for neighbor in neighbors:
+		neighbor.expand_val=1
+		neighbor.Expand_reciever()
 	
-func move_deactivator():
-	spriteIns.deactivate_move()
-
-func increment_by_move_val():
+func Expand_reciever():
+	Expand_button.show()
+	sprite.modulate=Color("af00ad")
+		
+func move_reciever(x:int):
+	if(player == 0 || player == x):	
+		move_buttton.show()
+		sprite.modulate=Color("af00ad")
+	
+func deactivator():
+	move_buttton.hide()
+	Action_button.hide()
+	Expand_button.hide()
+	sprite.modulate=Color("ffffff")
+	
+func _on_move_button_pressed() -> void:
+	get_tree().call_group("nodes", "deactivator")
 	increment_int(move_val)
+	for i in 8:
+		self.remove_from_group("player"+str(i))
+	self.add_to_group(player_val)
+
+func game_action(x: Callable):
+	action = x
+	Action_button.show()
 	
+
+func _on_action_button_pressed():
+	get_tree().call_group("nodes", "deactivator")
+	action.call()# Replace with function body.
+	
+func _on_expand_button_pressed():
+	if(Even % 2 == 0):
+		get_tree().call_group("nodes", "deactivator")
+	Even += Even
+	increment_int(expand_val)
+	for i in 8:
+		self.remove_from_group("player"+str(i))
+		self.add_to_group(player_val)
+	# Replace with function body.
 	

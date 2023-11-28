@@ -1,14 +1,19 @@
 class_name map extends Node2D
 
-var node1 = game_nodes.new(200, 200, "none", "europe")
-var node2 =  game_nodes.new(100, 100, "none", "europe")
+var node = preload("res://game_node.tscn")
 
 func _ready() -> void:
+	var node1 = node.instantiate()
+	node1.constructor(100, 100, "none", "europe")
+	
+	var node2 = node.instantiate()
+	node2.constructor(200, 200, "none", "europe")
+	
 	node1.add_neighbor(node2)
-	node1.read_neighbor_size()
-	node2.read_neighbor_size()
+	node2.add_neighbor(node1)
 	add_child(node1)
 	add_child(node2)
 	node1.set_int(2)
 	node2.set_int(3)
-	node1.move(2)
+	node2.Expand(node2)
+	
