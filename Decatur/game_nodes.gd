@@ -1,4 +1,4 @@
-class_name game_nodes extends Node2D
+class_name game_node extends Node2D
 
 var factor_count = 0
 var neighbors = Array() 
@@ -8,19 +8,16 @@ var player = 0
 @onready var move_buttton = $moveButton
 @onready var text_label = $textLabel
 
-var posX: int
-var posY: int
 var move_val: int
 	
 func constructor(x: int, y: int, ocean: String, land: String) -> void:
-	posX = x
-	posY = y
 	self.add_to_group("nodes")
-	position = Vector2(posX, posY)
+	self.add_to_group("no_player")
+	position = Vector2(x, y)
 	self.add_to_group(ocean)
 	self.add_to_group(land)
 	
-func add_neighbor(x: game_nodes):
+func add_neighbor(x: game_node):
 	neighbors.append(x)
 
 func set_int(x: int): 
@@ -47,3 +44,4 @@ func move_deactivator():
 func _on_move_button_pressed() -> void:
 	get_tree().call_group("nodes", "move_deactivator")
 	increment_int(move_val)
+
