@@ -1,19 +1,19 @@
 class_name map extends Node2D
 
-var node = preload("res://game_node.tscn")
+@onready var factory = $Node_Factory
 
 func _ready() -> void:
-	var node1 = node.instantiate()
-	node1.constructor(100, 100, "none", "europe")
 	
-	var node2 = node.instantiate()
-	node2.constructor(200, 200, "none", "europe")
-	
-	node1.add_neighbor(node2)
-	node2.add_neighbor(node1)
-	add_child(node1)
-	add_child(node2)
-	node1.set_int(2)
-	node2.set_int(3)
-	node2.Expand(node2)
-	
+	factory.node_creator(600, 200, "none", "europe")
+	factory.node_creator(500, 200, "none", "europe")
+	factory.set_neighbor()
+
+
+func _on_move_button_pressed() -> void:
+	var action = "move"
+	get_tree().call_group("nodes", "game_action", action)
+
+
+func _on_touch_screen_button_pressed() -> void:
+	var action = "expand"
+	get_tree().call_group("nodes", "game_action", action)
