@@ -3,8 +3,11 @@ class_name game_node extends Node2D
 var factor_count = 0
 var neighbors = Array() 
 var action: Callable
-var player_val: String
+var potential_player: int = 0 
 var current_player: int = 0
+
+var parent_player: player
+var potential_parent_player: player
 
 @onready var sprite = $node_sprite
 @onready var move_buttton = $moveButton
@@ -14,6 +17,10 @@ var current_player: int = 0
 
 var move_val: int = 0
 	
+
+func set_player_color():
+	sprite.modulate=parent_player.myColor
+
 func constructor(x: int, y: int, ocean: String, land: String) -> void:
 	self.add_to_group("nodes")
 	self.add_to_group("player0")
@@ -35,7 +42,8 @@ func increment_int(x: int):
 func move(x: int = 1):
 	for neighbor in neighbors:
 		neighbor.move_val=x
-		neighbor.player_val="player"+str(current_player)
+		neighbor.player_val=current_player
+		neighbor.potential_parent_player=parent_player
 		neighbor.move_reciever(current_player)
 		
 		
@@ -50,7 +58,7 @@ func expand():
 	var player_group="player"+str(current_player)
 	get_tree().call_group(player_group, "game_action", "expand_2")
 	
-func expand_2():
+func expand_2(): #This is called after expand. So that expand is used twice
 	increment_int(1)
 	
 func deactivator():
@@ -59,12 +67,28 @@ func deactivator():
 	action_button.hide()
 	highLight.hide()
 	
+func set_potential_player(playerVal: int, playerObj: player):
+	potential_player=playerVal
+	potential_parent_player=playerObj
+	
+
+func initial_factor_start():
+	self.set_int(7)
+	self.set_player()
+	parent_player.pass_turn()
+	
+func set_player():
+	for i in 8:
+		self.remove_from_group("player"+str(i))
+	self.add_to_group("player"+str(potential_player))
+	self.parent_player=potential_parent_player
+	self.current_player=potential_player
+	self.set_player_color()
+	
 func _on_move_button_pressed() -> void:
 	get_tree().call_group("nodes", "deactivator")
 	increment_int(move_val)
-	for i in 8:
-		self.remove_from_group("player"+str(i))
-	self.add_to_group(player_val)
+	self.set_player()
 
 func game_action(x: String):
 	highLight.show()
