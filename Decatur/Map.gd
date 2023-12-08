@@ -1,6 +1,10 @@
 class_name map extends Node2D
 
 @onready var factory = $Node_Factory
+@onready var buttons = $buttonFolder
+@onready var undo = $undoFolder
+
+var currentPlayer: int
 var playerObj = preload("res://player.gd")
 var playerArray: Array
 var playerColors: Array = [
@@ -11,6 +15,7 @@ var playerColors: Array = [
 ]
 
 func _ready() -> void:
+	print('hi')
 	factory.node_creator(600, 200, "none", "europe")
 	factory.node_creator(500, 200, "none", "europe")
 	factory.node_creator(900, 500, "none", "europe")
@@ -25,14 +30,32 @@ func _ready() -> void:
 		
 	for i in range(1,4):
 		playerArray[i].set_next_player(playerArray[i%3+1])
+		
 	playerArray[1].turn()
 
+func start_turn(x: int):
+	undo.hide()
+	currentPlayer=x
+	buttons.show()
 
 func _on_move_button_pressed() -> void:
+	buttons.hide()
+	undo.show()
 	var action = "move"
-	get_tree().call_group("nodes", "game_action", action)
+	var group = "player" + str(currentPlayer)
+	get_tree().call_group(group, "game_action", action)
 
+func noUndo():
+	undo.hide()
 
-func _on_touch_screen_button_pressed() -> void:
+func _on_expand_button_pressed() -> void:
+	buttons.hide()
+	undo.show()
 	var action = "expand"
-	get_tree().call_group("nodes", "game_action", action)
+	var group = "player" + str(currentPlayer)
+	get_tree().call_group(group, "game_action", action)
+
+func _on_undo_button_pressed() -> void:
+	undo.hide()
+	buttons.show()
+	get_tree().call_group("nodes", "deactivator")
