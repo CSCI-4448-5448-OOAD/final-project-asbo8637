@@ -2,9 +2,9 @@ extends Node
 
 @onready var node = preload("res://game_node.tscn")
 
-func node_creator(x: int, y: int, ocean: String, land: String):
+func node_creator(x: int, y: int, ocean: String, land: String, idNode: int):
 	var tempNode = node.instantiate()
-	tempNode.constructor(x, y, "none", "europe")
+	tempNode.constructor(x, y, "none", "europe", 0)
 	add_child(tempNode)
 
 #Will create, functions that generate whole board sections. Such as europe
@@ -326,6 +326,7 @@ func set_neighbor():
 	get_child(18).add_neighbor(get_child(20))
 	get_child(18).add_neighbor(get_child(21))
 	get_child(18).add_neighbor(get_child(22))
+	get_child(18).add_neighbor(get_child(26))
 	get_child(18).add_neighbor(get_child(29))	
 	get_child(18).add_neighbor(get_child(30))
 	get_child(18).add_neighbor(get_child(31))	
@@ -344,6 +345,7 @@ func set_neighbor():
 	get_child(19).add_neighbor(get_child(14))
 	get_child(19).add_neighbor(get_child(15))
 	get_child(19).add_neighbor(get_child(16))
+	get_child(19).add_neighbor(get_child(26))
 	get_child(19).add_neighbor(get_child(24))
 	get_child(19).add_neighbor(get_child(17))
 	get_child(19).add_neighbor(get_child(18))
@@ -402,6 +404,7 @@ func set_neighbor():
 	get_child(21).add_neighbor(get_child(20))
 	get_child(21).add_neighbor(get_child(8))
 	get_child(21).add_neighbor(get_child(25))
+	get_child(21).add_neighbor(get_child(26))
 	get_child(21).add_neighbor(get_child(22))
 	get_child(21).add_neighbor(get_child(29))	
 	get_child(21).add_neighbor(get_child(30))
@@ -414,6 +417,7 @@ func set_neighbor():
 	get_child(22).add_neighbor(get_child(0))
 	get_child(22).add_neighbor(get_child(1))
 	get_child(22).add_neighbor(get_child(2))
+	get_child(22).add_neighbor(get_child(26))
 	get_child(22).add_neighbor(get_child(3))
 	get_child(22).add_neighbor(get_child(4))
 	get_child(22).add_neighbor(get_child(6))
@@ -457,6 +461,7 @@ func set_neighbor():
 	get_child(24).add_neighbor(get_child(19))
 	get_child(24).add_neighbor(get_child(20))
 	get_child(24).add_neighbor(get_child(21))
+	get_child(24).add_neighbor(get_child(26))
 	get_child(24).add_neighbor(get_child(8))
 	get_child(24).add_neighbor(get_child(22))
 	get_child(24).add_neighbor(get_child(29))	
@@ -670,83 +675,83 @@ func set_neighbor():
 	
 func Europe_nodes():
 	#0 Iceland
-	node_creator(332, 90, "atlantic", "europe")
+	node_creator(332, 90, "atlantic", "europe", 0)
 	#1 British Isle
-	node_creator(395, 125, "atlantic", "europe")
+	node_creator(395, 125, "atlantic", "europe", 1)
 	#2 West Europe
-	node_creator(435, 170, "atlantic", "europe")
+	node_creator(435, 170, "atlantic", "europe", 2)
 	#3 East Europe
-	node_creator(510, 150, "atlantic", "europe")
+	node_creator(510, 150, "atlantic", "europe", 3)
 	#4 Scandi Navi
-	node_creator(485, 90, "atlantic", "europe")
+	node_creator(485, 90, "atlantic", "europe", 4)
 	#5 Russia
-	node_creator(590, 120, "none", "europe")
+	node_creator(590, 120, "none", "europe", 5)
 	#6 Anatolia
-	node_creator(560, 200, "atlantic", "europe")
+	node_creator(560, 200, "atlantic", "europe", 6)
 	
 func Middle_Asia_nodes():
 	#7 Egypt
-	node_creator(520, 270, "atlantic", "Middle asia")
+	node_creator(520, 270, "atlantic", "Middle asia", 7)
 	#8 Arabia
-	node_creator(615, 280, "Indian", "Middle asia")
+	node_creator(615, 280, "Indian", "Middle asia", 8)
 	#9 Persia
-	node_creator(683, 230, "Indian", "Middle asia")
+	node_creator(683, 230, "Indian", "Middle asia", 9)
 	#10 Kazakh Khanate
-	node_creator(750, 175, "none", "Middle asia")
+	node_creator(750, 175, "none", "Middle asia", 10)
 	#11 Urals
-	node_creator(690, 110, "none", "Middle Asia")
+	node_creator(690, 110, "none", "Middle Asia", 11)
 	#12 West China
-	node_creator(822, 215, "none", "Middle Asia")
+	node_creator(822, 215, "none", "Middle Asia", 12)
 	#13 Mongolia
-	node_creator(875, 165, "none", "Middle Asia")
+	node_creator(875, 165, "none", "Middle Asia", 13)
 	
 func Africa_nodes():
 	#14 Barbary Coast
-	node_creator(430, 250, "atlantic", "africa")
+	node_creator(430, 250, "atlantic", "africa", 14)
 	#15 West Africa
-	node_creator(378, 300, "atlantic", "africa")
+	node_creator(378, 300, "atlantic", "africa", 15)
 	#16 Niger Basin
-	node_creator(438, 330, "atlantic", "africa")
+	node_creator(438, 330, "atlantic", "africa", 16)
 	#17 Congo Basin
-	node_creator(500, 398, "atlantic", "africa")
+	node_creator(500, 398, "atlantic", "africa", 17)
 	#18 South Africa
-	node_creator(520, 510, "atlantic", "africa")
+	node_creator(520, 510, "atlantic", "africa", 18)
 	#19 East Africa
-	node_creator(560, 448, "Indian", "africa")
+	node_creator(560, 448, "Indian", "africa", 19)
 	#20 Madagastor
-	node_creator(617, 478, "Indian", "africa")
+	node_creator(617, 478, "Indian", "africa", 20)
 	#21 Horn of Africa
-	node_creator(585, 360, "Indian", "africa")
+	node_creator(585, 360, "Indian", "africa", 21)
 	
 func East_Asia_nodes():
 	#22 India
-	node_creator(760, 275, "Indian", "EastAsia")
+	node_creator(760, 275, "Indian", "EastAsia", 22)
 	#23 Siberia
-	node_creator(835, 95, "none", "EastAsia")
+	node_creator(835, 95, "none", "EastAsia", 23)
 	#24 Indo China
-	node_creator(860, 300, "Indian", "EastAsia")
+	node_creator(860, 300, "Indian", "EastAsia", 24)
 	#25 East China
-	node_creator(910, 245, "Pacific", "EastAsia")
+	node_creator(910, 245, "Pacific", "EastAsia", 25)
 	#26 Manchuria
-	node_creator(975, 165, "Pacific", "EastAsia")
+	node_creator(975, 165, "Pacific", "EastAsia", 26)
 	#27 Yakutia
-	node_creator(953, 89, "none", "EastAsia")
+	node_creator(953, 89, "none", "EastAsia", 27)
 	#28 Far East
-	node_creator(1117, 89, "Pacific", "EastAsia")
+	node_creator(1117, 89, "Pacific", "EastAsia", 28)
 	
 	
 func Oceania_nodes():
 	#29 Japan
-	node_creator(1027, 208, "Pacific", "Oceania")
+	node_creator(1027, 208, "Pacific", "Oceania", 29)
 	#30 Philip Pine
-	node_creator(960, 329, "Pacific", "Oceania")
+	node_creator(960, 329, "Pacific", "Oceania", 30)
 	#31 New Guinea
-	node_creator(1040, 410, "Pacific", "Oceania")
+	node_creator(1040, 410, "Pacific", "Oceania", 31)
 	#32 East Australia
-	node_creator(1053, 522, "Pacific", "Oceania")
+	node_creator(1053, 522, "Pacific", "Oceania", 32)
 	#33 West Australia
-	node_creator(960, 512, "Indinan", "Oceania")
+	node_creator(960, 512, "Indinan", "Oceania", 33)
 	#34 New Zealand
-	node_creator(1120, 610, "Pacific", "Oceania")
+	node_creator(1120, 610, "Pacific", "Oceania", 34)
 	#35 Indonesia 
-	node_creator(906, 392, "Indinan", "Oceania")
+	node_creator(906, 392, "Indinan", "Oceania",35)

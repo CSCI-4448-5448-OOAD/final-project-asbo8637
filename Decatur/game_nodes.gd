@@ -22,7 +22,7 @@ var move_val: int = 0
 func set_player_color():
 	sprite.modulate=parent_player.myColor
 
-func constructor(x: int, y: int, ocean: String, land: String) -> void:
+func constructor(x: int, y: int, ocean: String, land: String, idNode: int) -> void:
 	self.add_to_group("nodes")
 	self.add_to_group("player0")
 	position = Vector2(x, y)

@@ -1,3 +1,3 @@
 res://map.tscn
-res://Map.gd
+res://game_nodes.gd
 res://Node_Factory.gd
