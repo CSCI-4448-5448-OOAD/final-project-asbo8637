@@ -1,9 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://dqhgruik4l0ca"]
+[gd_scene load_steps=5 format=3 uid="uid://dqhgruik4l0ca"]
 
 [ext_resource type="Script" path="res://game_nodes.gd" id="1_wmwnf"]
 [ext_resource type="Texture2D" uid="uid://b5h00nm2mmohy" path="res://art/particle.png" id="2_c20ik"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uw5o6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fh6h7"]
 
 [node name="gameNode" type="Node2D"]
 scale = Vector2(0.045, 0.045)
@@ -40,5 +42,11 @@ modulate = Color(0.686275, 0, 0.678431, 1)
 scale = Vector2(50, 50)
 shape = SubResource("CircleShape2D_uw5o6")
 
+[node name="fightButton" type="TouchScreenButton" parent="."]
+visible = false
+scale = Vector2(50, 50)
+shape = SubResource("CircleShape2D_fh6h7")
+
 [connection signal="pressed" from="moveButton" to="." method="_on_move_button_pressed"]
 [connection signal="pressed" from="actionButton" to="." method="_on_action_button_pressed"]
+[connection signal="pressed" from="fightButton" to="." method="_on_fight_button_pressed"]

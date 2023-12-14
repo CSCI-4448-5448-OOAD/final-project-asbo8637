@@ -1,15 +1,15 @@
+#creates game_nodes
 extends Node
 
 @onready var node = preload("res://game_node.tscn")
 
-func node_creator(x: int, y: int, ocean: String, land: String, idNode: int):
+func node_creator(x: int, y: int, ocean: String, land: String, idNode: int): #this function makes a single node.
 	var tempNode = node.instantiate()
 	tempNode.constructor(x, y, "none", "europe", 0)
 	add_child(tempNode)
 
 #Will create, functions that generate whole board sections. Such as europe
-
-func set_neighbor():
+func set_neighbor(): #connects all nodes. For propper neighbors
 	get_child(0).add_neighbor(get_child(1))
 	get_child(0).add_neighbor(get_child(2))
 	get_child(0).add_neighbor(get_child(3))

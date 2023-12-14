@@ -1,11 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://dg8wf0fe4wu17"]
+[gd_scene load_steps=10 format=3 uid="uid://dg8wf0fe4wu17"]
 
 [ext_resource type="Script" path="res://Map.gd" id="1_n57u5"]
 [ext_resource type="Texture2D" uid="uid://bo7leqglor67e" path="res://art/Decatur_Board_LG.jpg" id="2_7t5sb"]
 [ext_resource type="Texture2D" uid="uid://dvxf30yqegbmp" path="res://art/pexels-fwstudio-139306.jpg" id="2_pa78r"]
 [ext_resource type="Texture2D" uid="uid://8ooslxxylps" path="res://art/button.webp" id="3_3e5kq"]
 [ext_resource type="Script" path="res://Node_Factory.gd" id="4_j40ej"]
-[ext_resource type="Texture2D" uid="uid://uio52uw5mhcw" path="res://art/clockHand.png" id="6_pvl62"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_coika"]
 
@@ -33,16 +32,13 @@ script = ExtResource("4_j40ej")
 
 [node name="fightScores" type="RichTextLabel" parent="."]
 visible = false
-modulate = Color(0, 0, 0, 1)
-offset_left = 23.0
-offset_top = 44.0
-offset_right = 425.0
-offset_bottom = 517.0
-theme_override_constants/outline_size = 1
-theme_override_font_sizes/normal_font_size = 30
+offset_left = 28.0
+offset_top = 37.0
+offset_right = 220.0
+offset_bottom = 173.0
 text = "player 1 fight: 3
 player 2 fight: 1
-"
+player 3 wins"
 
 [node name="buttonFolder" type="Node2D" parent="."]
 visible = false
@@ -145,14 +141,6 @@ text = "Undo
 [node name="Timer" type="Timer" parent="."]
 wait_time = 5.0
 one_shot = true
-
-[node name="clockHand" type="Sprite2D" parent="."]
-position = Vector2(776, 533)
-rotation = -0.872665
-scale = Vector2(0.06, 0.06)
-texture = ExtResource("6_pvl62")
-centered = false
-offset = Vector2(-320, -1215)
 
 [connection signal="pressed" from="buttonFolder/skipButton" to="." method="_on_skip_button_pressed"]
 [connection signal="pressed" from="buttonFolder/moveButton" to="." method="_on_move_button_pressed"]
