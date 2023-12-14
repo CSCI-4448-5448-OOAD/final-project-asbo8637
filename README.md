@@ -8,4 +8,6 @@ Team Members:
 Java Version: Using Godot 4, and written in gdscript.
 
 Additional Comments:
+Video Link: https://drive.google.com/file/d/1qOgjwHnqdWuhZgFeHHlkvGh1AXKe3Eyn/view?usp=sharing
+
 
